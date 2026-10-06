@@ -12,7 +12,9 @@
 > The same checking pipeline also handles live Bitcoin, currency, and stock feeds, so you know it works outside textbooks.
 > Open **`preview.html`** (or the project website) for the interactive version with videos and sliders. If you only do one thing: run `docker compose up --build lab`.
 
-🌐 **Interactive website:** open [`preview.html`](preview.html) locally, or publish [`docs/index.html`](docs/index.html) with GitHub Pages (Settings → Pages → Deploy from a branch → `main` → `/docs`) — same content, with video player and live sliders.
+🌐 **Interactive website:** open [`preview.html`](preview.html) locally, or visit the live site once Pages is on:
+`https://m0-ar.github.io/steel-ball-universe-2026/` · [`/preview.html`](https://m0-ar.github.io/steel-ball-universe-2026/preview.html) · [`/docs/preview.html`](https://m0-ar.github.io/steel-ball-universe-2026/docs/preview.html)
+Publish with GitHub Pages (Settings → Pages → Deploy from a branch → `main` → `/docs`) — same content, with video player and live sliders. Mirrors below make either source setting resolve.
 
 ![Project website hero: title, 60-second summary, badges, and three action buttons](docs/images/preview-hero.png)
 
@@ -111,7 +113,7 @@ If you see `PASS 12/12`, you reproduced the whole story. Open `reports/benchmark
 - **Real tolerances, honest failures** — each module returns `{name, pass, numbers…}`; the suite exits non-zero on failure. One test is *expected to reject* (markets ≠ odd-law), proving the harness can say “no”.
 - **Live-data leg** — keyless public feeds with shipped snapshots for offline runs; sources labeled `live` vs `cached` in every report.
 - **One-command reproduce** — `docker compose up --build lab` → `reports/benchmark.json` + 3 figures; `docker compose run --rm test` → pytest gate. No secrets, no GPU.
-- **Website included** — `preview.html` + `docs/index.html` + `docs/.nojekyll` + `.github/workflows/pages.yml`. Interactive canvases (bars, orbit slider, electron firing) run fully in the browser.
+- **Website included** — `index.html` (root redirect) + `preview.html` (root copy) + `docs/index.html` + `docs/preview.html` (canonical pair) + `.nojekyll` at root and in `docs/` + `.github/workflows/pages.yml`. Recommended source `/docs`; mirrors make root source resolve too. Interactive canvases (bars, orbit slider, electron firing) run fully in the browser.
 - **Video + screenshots done right** — GIF for README autoplay, MP4 + poster for the site, themed screenshots with alt text, relative paths, sizes within 2026 best-practice budgets.
 - **PhD-ready patterns** — three confirmed structures + one null, each paired with a concrete next experiment.
 
@@ -232,19 +234,41 @@ Requirements: Python 3.11, `numpy scipy matplotlib pytest requests` (pinned in `
 
 ## 🌐 Make the website live (GitHub Pages)
 
-This repo already contains the site: `docs/index.html` (entry), `docs/.nojekyll`, media under `docs/media/`, images under `docs/images/`, and `.github/workflows/pages.yml`.
+This repo already contains the site: `docs/index.html` + `docs/preview.html` (identical canonical pair), `preview.html` (root copy with `docs/`-prefixed asset paths), `index.html` (root redirect to `preview.html`), `.nojekyll` at root and in `docs/`, media under `docs/media/`, images under `docs/images/`, and `.github/workflows/pages.yml`.
 
-**Option A · Deploy from a branch (simplest, no build):**
+**Option A · Deploy from a branch (simplest, no build — recommended):**
 
 1. Commit and push: `git push origin main`
 2. GitHub → your repo → **Settings** → **Pages** (sidebar: *Code, planning, and automation* → *Pages*)
 3. *Build and deployment* → *Source*: **Deploy from a branch**
 4. *Branch*: `main`, *Folder*: `/docs` → **Save**
-5. Wait ~1 minute → visit `https://<you>.github.io/<repo>/`
+5. Wait 1–2 min, check the Actions *pages build and deployment* run, then visit:
+   - `https://m0-ar.github.io/steel-ball-universe-2026/` (entry `docs/index.html`)
+   - `https://m0-ar.github.io/steel-ball-universe-2026/preview.html` (same page via `docs/preview.html`)
+   - `https://m0-ar.github.io/steel-ball-universe-2026/docs/preview.html` also resolves when source is `/` (root)
 
-**Option B · GitHub Actions (custom build):** keep the included `pages.yml` (upload artifact → deploy). Then set *Source*: **GitHub Actions**. Same URL.
+**Option B · GitHub Actions (custom build):** keep the included `pages.yml` (upload artifact → deploy). Then set *Source*: **GitHub Actions**. Same URLs.
 
-Notes from the 2026 setup guides: entry file must be at the top of the publishing source (`docs/index.html`); `.nojekyll` must sit *inside* `docs/` to skip Jekyll processing; project sites live under `/<repo>/` so use **relative paths** (`media/demo.mp4`, not `/media/…`); custom domain + HTTPS under Settings → Pages → Custom domain.
+**Why the mirrors:** the entry file must sit at the top level of the chosen source (`/` or `/docs`), and every other URL mirrors the repo path under that source (source `/docs` → repo `docs/x.html` serves at `/x.html`; source `/` → repo `docs/x.html` serves at `/docs/x.html`). A green deployment only proves *something* built, never that *your path* exists — so this repo ships both: recommend `/docs`, and root `preview.html` + `index.html` keep root source working too.
+
+**Diagnose in 10 seconds (no login):**
+
+```bash
+BASE="https://m0-ar.github.io/steel-ball-universe-2026"
+for p in "" "preview.html" "docs/preview.html"; do
+  printf "%s -> " "/$p"
+  curl -s -o /dev/null -w "%{http_code}\n" "$BASE/$p"
+done
+```
+
+| `/` | `/preview.html` | `/docs/preview.html` | Meaning |
+|---|---|---|---|
+| 200 | 200 | 404 | source = `/docs`, all good |
+| 200 | 404 | 200 | source = `/` (root); file only under `/docs` |
+| 404 | 404 | 404 | Pages off / still building / wrong branch |
+| 200 | 404 | 404 | source = `/`, but neither entry nor file exists |
+
+Notes: `.nojekyll` must sit *in the source folder* (this repo has it in both `/` and `/docs`) or Jekyll may process files you wanted static; project sites live under `/<repo>/` so use **relative paths** (`media/demo.mp4`, not `/media/…`); custom domain + HTTPS under Settings → Pages → Custom domain.
 
 ---
 
@@ -252,7 +276,9 @@ Notes from the 2026 setup guides: entry file must be at the top of the publishin
 
 ```text
 steel-ball-universe-2026/
-  preview.html            # beautiful standalone page (this site, root copy)
+  preview.html            # root copy (docs/-prefixed assets) — resolves /preview.html under either source
+  index.html              # root redirect → preview.html with fallback links
+  .nojekyll               # root copy (docs/.nojekyll also present)
   README.md               # you are here (paper + guide)
   Dockerfile  docker-compose.yml  requirements.txt  Makefile
   CITATION.cff  LICENSE  .gitignore
@@ -266,7 +292,7 @@ steel-ball-universe-2026/
   tests/                  # pytest gates (12)
   data/                   # constants + live snapshots (seeded, refreshed live on run)
   reports/                # benchmark.json + figures (regenerated)
-  docs/                   # website (index.html, .nojekyll, images/, media/)
+  docs/                   # website (index.html + preview.html, .nojekyll, images/, media/)
     RESEARCH_LOG.md  METHOD.md
   tools/make_demo.py      # regenerates demo.mp4/gif/poster
 ```
