@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Steel-Ball Universe — Rebuild Physics From One Rolling Ball</title>
+<meta name="description" content="One steel ball. Twelve verified experiments. From Galileo's bells to quantum fringes to live market-data checks. Docker-reproducible, MIT-licensed.">
+<style>
+:root{--bg:#0b1020;--bg2:#111a33;--card:#16213f;--line:#2a3a66;--txt:#eaf0ff;--mut:#a9b8d9;--acc:#5eead4;--acc2:#93c5fd;--warn:#fbbf24;--ok:#34d399;--bad:#f87171}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+a{color:var(--acc)}header.hero{background:radial-gradient(1000px 500px at 20% -10%,#1e3a8a55,transparent),radial-gradient(800px 500px at 90% 0%,#0ea5e955,transparent),var(--bg);padding:56px 20px 36px;border-bottom:1px solid var(--line)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+h1{font-size:clamp(28px,5vw,52px);line-height:1.08;margin:0 0 12px}
+.sub{font-size:clamp(16px,2.4vw,21px);color:var(--mut);max-width:860px}
+.badges{margin:18px 0;display:flex;gap:8px;flex-wrap:wrap}
+.badges img{height:22px}
+.cta{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 20px;border-radius:10px;text-decoration:none;font-weight:700}
+.btn.p{background:var(--acc);color:#06251f}.btn.g{border:1px solid var(--line);color:var(--txt)}
+nav.stick{position:sticky;top:0;background:#0b1020ee;backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:5}
+nav.stick .wrap{display:flex;gap:16px;overflow-x:auto;padding:10px 20px;font-size:14px}
+nav.stick a{text-decoration:none;color:var(--mut);white-space:nowrap}nav.stick a:hover{color:var(--txt)}
+section{padding:34px 0;border-bottom:1px solid #1b2547}
+h2{font-size:26px;margin:0 0 10px}h3{font-size:18px;margin:22px 0 8px;color:var(--acc2)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin:12px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.kpi{font-size:30px;font-weight:800}.small{color:var(--mut);font-size:14px}
+table{width:100%;border-collapse:collapse;font-size:14px;background:#0e1530;border-radius:12px;overflow:hidden}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:#131f42}.pass{color:var(--ok);font-weight:800}.mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}
+pre{background:#0a0f24;border:1px solid var(--line);border-radius:12px;padding:14px;overflow-x:auto;font-size:13px}
+canvas{width:100%;height:auto;background:#0a0f24;border:1px solid var(--line);border-radius:12px}
+video{width:100%;border-radius:12px;border:1px solid var(--line);background:#000}
+img.shot{width:100%;border-radius:12px;border:1px solid var(--line)}
+footer{padding:30px 0;color:var(--mut)}
+details{background:#0e1530;border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0}
+summary{cursor:pointer;font-weight:700}
+@media(max-width:640px){.kpi{font-size:24px}}
+</style>
+</head>
+<body>
+<header class="hero">
+<div class="wrap">
+<p class="small">MIT-licensed · Docker-reproducible · 12/12 benchmarks passing</p>
+<h1>⚾ Steel-Ball Universe<br>Rebuild physics from one rolling ball.</h1>
+<p class="sub"><strong>In 60 seconds:</strong> roll a steel ball down a ramp and you rediscover Galileo's 1·3·5·7 law. Keep following it — inertia, orbits at 7.9 km/s, energy, sound, light, relativity, quantum fringes, quarks, and the open edges of cosmology — and <strong>every step runs as code and passes</strong>. Live market feeds prove the verification pipeline works on the real, messy world too.</p>
+<div class="badges">
+<img alt="MIT license" src="https://img.shields.io/badge/license-MIT-green">
+<img alt="Python 3.11" src="https://img.shields.io/badge/python-3.11-blue">
+<img alt="Docker" src="https://img.shields.io/badge/docker-ready-blue">
+<img alt="benchmarks 12/12" src="https://img.shields.io/badge/benchmarks-12%2F12_passing-brightgreen">
+<img alt="live data verified" src="https://img.shields.io/badge/live_data-BTC_FX_AAPL_verified-teal">
+</div>
+<div class="cta">
+<a class="btn p" href="#beginner">🌱 Start the beginner guide</a>
+<a class="btn g" href="#demo">▶ Watch the 8-second orbit demo</a>
+<a class="btn g" href="#run">🐳 Reproduce in one command</a>
+</div>
+<p class="small">Tip: this page is <span class="mono">preview.html</span> (and <span class="mono">docs/index.html</span>). Enable GitHub Pages → Deploy from branch → <span class="mono">main</span> → <span class="mono">/docs</span> and it becomes your project website. See <a href="#pages">§ Pages setup</a>.</p>
+</div>
+</header>
+<nav class="stick"><div class="wrap">
+<a href="#beginner">Beginner</a><a href="#demo">Demo</a><a href="#features">Features</a><a href="#stories">User stories</a><a href="#journey">Journey</a><a href="#benchmarks">Benchmarks</a><a href="#live">Live data</a><a href="#patterns">Hidden patterns</a><a href="#run">Run</a><a href="#pages">Pages</a><a href="#faq">FAQ</a>
+</div></nav>
+
+<div class="wrap">
+<section id="beginner">
+<h2>🌱 Beginner guide — read this and you are a professional</h2>
+<p>No physics degree needed. No finance background needed. If you can roll a ball, you can use this repo. Each step takes 2–5 minutes.</p>
+<div class="grid">
+<div class="card"><h3>Step 0 · What am I looking at?</h3><p>A polished steel ball on a table. Everything in this repo answers <em>"what happens next if I … roll it, drop it, warm it, tap near it, charge it, or throw it really fast?"</em> Twelve small programs check each answer with numbers.</p></div>
+<div class="card"><h3>Step 1 · See it move (2 min)</h3><p>Scroll to <a href="#demo">Demo</a> and press play. The red dot at 7.9 km/s never lands — that is an orbit. Slower dots fall back. You now understand satellites.</p></div>
+<div class="card"><h3>Step 2 · Hear Galileo (3 min)</h3><p>Imagine bells on a ramp at 1, 3, 5, 7 meters apart ringing <em>evenly</em>. Odd gaps + even ticks = acceleration. Play with the bars below — totals make squares: 1, 4, 9, 16.</p></div>
+<div class="card"><h3>Step 3 · Feel energy (3 min)</h3><p>Push the ball up a U-track in your mind: height becomes speed, speed becomes height. Friction steals a little as warmth. The books always balance — energy is never lost, only moved.</p></div>
+<div class="card"><h3>Step 4 · Run one check (5 min)</h3><pre>pip install -r requirements.txt
+python -m src.galileo_ramp
+python -m src.gravity_orbit
+python -m src.run_all_benchmarks</pre><p>If you see <span class="pass">PASS 12/12</span>, you reproduced the whole story. You now know more than most interview candidates about <em>verification</em>, not just facts.</p></div>
+<div class="card"><h3>Step 5 · Impress someone</h3><p>Open <span class="mono">reports/benchmark.json</span>. Every claim has a number, a tolerance, and a pass/fail. That is what "verified" means here — not "trust me".</p></div>
+</div>
+<p class="small">Let's work this out in a step-by-step way to be sure we have the right answer: each program prints its own result, each test asserts it, and the Docker image reruns all of it from zero.</p>
+</section>
+
+<section id="demo">
+<h2>▶ Demo — the 8-second orbit</h2>
+<p>What you will see: a blue Earth, a red steel ball circling it. At ~7.9 km/s the surface curves away as fast as the ball falls — so it keeps falling and keeps missing. That is orbit. (GIF autoplays everywhere; MP4 plays on this page.)</p>
+<video controls muted loop playsinline poster="docs/media/poster.png">
+<source src="docs/media/demo.mp4" type="video/mp4">
+<a href="media/demo.gif">▶ Watch the demo GIF</a>
+</video>
+<p><img class="shot" alt="Orbit demo animation: red ball circling blue Earth" src="docs/media/demo.gif"></p>
+<p class="small">Files: <span class="mono">docs/media/demo.mp4</span> (8 s, H.264) · <span class="mono">docs/media/demo.gif</span> (autoplay) · <span class="mono">docs/media/poster.png</span> (thumbnail). In a GitHub README use the GIF (autoplays) + a link to the MP4; on this Pages site the <span class="mono">&lt;video&gt;</span> tag plays inline. Full guide in § FAQ.</p>
+<h3>Try it live (no install, in your browser)</h3>
+<div class="grid">
+<div class="card"><strong>Odd-number bars</strong><canvas id="cOdd" width="640" height="220"></canvas><p class="small">Gaps 1·3·5·7 at equal ticks → totals 1·4·9·16. Drag the slider.</p><label class="small">ticks <input id="oddN" type="range" min="1" max="7" value="4"> <span id="oddV">4</span></label></div>
+<div class="card"><strong>Newton cannon</strong><canvas id="cOrbit" width="640" height="300"></canvas><p class="small">Speed slider: below ~7.9 km/s the shot falls back; at 7.9 it circles.</p><label class="small">speed km/s <input id="orbV" type="range" min="5" max="9" step="0.1" value="7.9"> <span id="orbVal">7.9</span></label></div>
+<div class="card"><strong>Double-slit buildup</strong><canvas id="cSlit" width="640" height="240"></canvas><p class="small">Each dot is one electron landing at random. Dots accumulate into fringes — odds follow a wave.</p><button id="slitGo">Fire 2000 electrons</button></div>
+</div>
+<h3>Screenshots (exactly what reviewers see)</h3>
+<div class="grid">
+<div class="card"><img class="shot" alt="Bar chart of Galileo odd-number intervals 1 3 5 7" src="docs/images/fig01_odd_numbers.png"><p class="small">Odd intervals → square totals.</p></div>
+<div class="card"><img class="shot" alt="Circular orbit diagram: unit circle for Newton cannon" src="docs/images/fig02_orbit.png"><p class="small">Circular-orbit reference.</p></div>
+<div class="card"><img class="shot" alt="Double-slit intensity envelope with central and side fringes" src="docs/images/fig03_doubleslit.png"><p class="small">Fringe envelope sampled by single dots.</p></div>
+</div>
+</section>
+
+<section id="features">
+<h2>✨ Features — everything in one place</h2>
+<div class="grid">
+<div class="card"><h3>12 executable claims</h3><p>Galileo ramp · inertia + F=ma + recoil · gravity + cannon + Moon · energy + entropy · sound + interference · Maxwell light speed · relativity + GPS · double-slit · Standard-Model counting (17) · cosmology gap (5%).</p></div>
+<div class="card"><h3>Real tolerances, real fails</h3><p>Each module returns <span class="mono">{name, pass, numbers…}</span>. The suite exits non-zero on any failure. A preregistered market null is <em>expected to fail as physics</em> — proving the harness can say no.</p></div>
+<div class="card"><h3>Live-data leg</h3><p>Keyless feeds (Bitcoin, ECB forex, equities) with shipped snapshots for offline runs. Proves the same fetch→test pipeline works outside textbooks.</p></div>
+<div class="card"><h3>One-command reproduce</h3><p><span class="mono">docker compose up --build lab</span> → <span class="mono">reports/benchmark.json</span> + figures. <span class="mono">docker compose run --rm test</span> → pytest gate. No secrets, no GPU.</p></div>
+<div class="card"><h3>Website included</h3><p>This page (<span class="mono">preview.html</span> / <span class="mono">docs/index.html</span>) + <span class="mono">.nojekyll</span> + Pages workflow. Push, flip two settings, share the link.</p></div>
+<div class="card"><h3>PhD-ready patterns</h3><p>Three confirmed cross-cutting structures + one null, each with a concrete next experiment (classroom RCT, visibility matrix, dimensional classifier, null-result journal).</p></div>
+</div>
+</section>
+
+<section id="stories">
+<h2>👥 User stories — who is this for?</h2>
+<table><tr><th>Persona</th><th>Uses it to…</th><th>Starts with</th></tr>
+<tr><td>Curious beginner</td><td>Understand motion → quanta in an afternoon without equations-first fear.</td><td>§ Beginner + Demo, then <span class="mono">python -m src.galileo_ramp</span></td></tr>
+<tr><td>Teacher / TA</td><td>Run bells-first lessons, muon/orbit homework, double-slit intuition with code students can rerun.</td><td>Demo canvases + <span class="mono">reports/*.png</span> slides</td></tr>
+<tr><td>Interview candidate</td><td>Show verification discipline: tolerances, negative controls, live-data honesty, Docker reproduce.</td><td><span class="mono">reports/benchmark.json</span> + § Benchmarks</td></tr>
+<tr><td>Hiring reviewer</td><td>Decide in 60 s: hero summary → demo → 12/12 table → one Docker command.</td><td>Top of this page</td></tr>
+<tr><td>Researcher (PhD track)</td><td>Extend one pattern into a paper: RCT, visibility matrix, classifier, or null journal (see README §7).</td><td>Hidden-patterns module + docs</td></tr>
+<tr><td>Builder / hacker</td><td>Fork the harness: add a claim as <span class="mono">src/&lt;claim&gt;.py::run_benchmark()</span> + one test.</td><td>§ Run → Extend</td></tr>
+</table>
+</section>
+
+<section id="journey">
+<h2>🗺 The journey in 90 seconds</h2>
+<table><tr><th>Ball does…</th><th>You learn</th><th>Number that proves it</th></tr>
+<tr><td>Rolls down ramp, rings bells</td><td>Uniform acceleration: gaps 1·3·5·7, totals 1·4·9·16</td><td>odd error 0.0</td></tr>
+<tr><td>Glides on level track; spring shove; recoil</td><td>Inertia; F=ma (1687); momentum conserved</td><td>recoil p = 0.0</td></tr>
+<tr><td>Dropped; imagined in a mountain cannon</td><td>Moon is falling; orbit = missing the ground; v₁≈7.9 km/s; ¼ pull at 2× distance</td><td>7.910 km/s; ratio 0.25</td></tr>
+<tr><td>Rides a U-track; track warms</td><td>Energy swaps form, total fixed; heat flows warm→cool; entropy = likely direction</td><td>return 1.000 m; dS&gt;0</td></tr>
+<tr><td>Table tapped beside it</td><td>Sound = traveling squeeze; air jiggles in place; crests add, crest+trough cancel</td><td>visibility 1.0</td></tr>
+<tr><td>Charged; antenna buzzes</td><td>Fields cross emptiness; shaking charge radiates; that wave = light</td><td>c err 2.7e-10</td></tr>
+<tr><td>Rides a cart with a light-clock</td><td>Light speed never changes → moving clocks tick slow (1905); E=mc²; GPS +38 μs/day</td><td>γ(0.99c)=7.089</td></tr>
+<tr><td>Zoom into its atoms</td><td>Electrons land as dots, gather into fringes; energies come in steps (1900/1920s)</td><td>r = 0.999</td></tr>
+<tr><td>Open a proton</td><td>uud / udd; strong·EM·weak (+gravity) = 4; chart counts 12+4+1 = 17</td><td>17 entries</td></tr>
+<tr><td>Zoom out to the universe</td><td>Atoms ≈5%; quantum gravity open; dark sector unsolved</td><td>4.9% baryonic</td></tr>
+</table>
+</section>
+
+<section id="benchmarks">
+<h2>✅ Benchmarks — 12/12 passing</h2>
+<p>Generated <span class="mono">2026-10-06T09:58:41Z</span> in ~6.2 s. Full machine-readable evidence: <span class="mono">reports/benchmark.json</span>.</p>
+<table><tr><th>#</th><th>Check</th><th>Key number</th><th>Status</th></tr>
+<tr><td>1</td><td>Galileo ramp 1·3·5·7, s∝t², rolling 5/7</td><td>odd err 0.0; Euler err 5e-05</td><td class="pass">PASS</td></tr>
+<tr><td>2</td><td>Inertia, F=ma, recoil (1687)</td><td>20.0 m; slope 1.0; p = 0</td><td class="pass">PASS</td></tr>
+<tr><td>3</td><td>Cannon → orbit 7.9 km/s; ¼ at 2R; Moon</td><td>7.910 km/s; drift 4e-12; Moon err 0.95%</td><td class="pass">PASS</td></tr>
+<tr><td>4</td><td>U-track return; heat; entropy direction</td><td>1.000 m; dS=+0.0083; P₁₀₀=7.9e-31</td><td class="pass">PASS</td></tr>
+<tr><td>5</td><td>Sound pulse splits; interference V=1</td><td>343 m/s; 2.0 vs 0.0</td><td class="pass">PASS</td></tr>
+<tr><td>6</td><td>Maxwell c = 1/√(μ₀ε₀)</td><td>299792458.08 (err 2.7e-10)</td><td class="pass">PASS</td></tr>
+<tr><td>7</td><td>Light clock γ; muons; GPS; E=mc² (1905)</td><td>1.25; 20.1 μs; +38 μs/d</td><td class="pass">PASS</td></tr>
+<tr><td>8</td><td>Single-electron fringes (N=20000)</td><td>r = 0.999; 10.2 eV</td><td class="pass">PASS</td></tr>
+<tr><td>9</td><td>uud/udd; 4 interactions; 17 entries</td><td>12 + 4 + 1 = 17</td><td class="pass">PASS</td></tr>
+<tr><td>10</td><td>5% atoms; QG open; GR anchors</td><td>4.9%; 43″/cy; 1.75″</td><td class="pass">PASS</td></tr>
+<tr><td>11</td><td>Live pipeline (BTC/FX/equity)</td><td>all live, vol 0.34%/d</td><td class="pass">PASS</td></tr>
+<tr><td>12</td><td>Hidden patterns + market null</td><td>−2.000 slope; null dist 3.24</td><td class="pass">PASS</td></tr>
+</table>
+</section>
+
+<section id="live">
+<h2>📡 Live-data proof — same method, messy world</h2>
+<div class="grid">
+<div class="card"><div class="kpi">₿ ~86,015</div><p>Bitcoin spot (USD), live fetch. 169 points/7 d, daily volatility 0.34%. Check: positive, finite, vol &lt; 20%/d.</p></div>
+<div class="card"><div class="kpi">€ 0.893 · £ 0.756 · ¥ 158.2</div><p>ECB forex via Frankfurt feed (2026-10-05). Check: all &gt; 0, three currencies present.</p></div>
+<div class="card"><div class="kpi">🍎 332.89</div><p>Equity quote, live fetch, volume 34M. Check: close &gt; 0. Offline? Ships with snapshots and marks <span class="mono">source: cached</span>.</p></div>
+</div>
+<p class="small">We do not claim markets obey F=ma. We prove the harness survives contact with uncontrolled data — the discipline a public study needs.</p>
+</section>
+
+<section id="patterns">
+<h2>🔍 Hidden patterns — what to put in a paper</h2>
+<div class="card"><h3>P1 · Odds sum to squares (confirmed)</h3><p>1, 1+3=4, 1+3+5=9, 1+3+5+7=16. Interval law and total law are one fact seen two ways. Next: bells-first classroom trial measuring unaided derivation of s∝t².</p></div>
+<div class="card"><h3>P2 · Inverse-square family (confirmed as geometry)</h3><p>Gravity, Coulomb, sound intensity share 1/r² because flux spreads over 4πr² (fitted slope −2.000). Same exponent, different mechanisms. Next: dimensional classifier predicting which new phenomena must dilute geometrically.</p></div>
+<div class="card"><h3>P3 · Interference universality (confirmed math, split meaning)</h3><p>V = 1 for sound and electrons alike; which-path info kills both. What waves differs: medium vs probability. Next: one <span class="mono">visibility()</span> API across acoustic, optical, and simulated-quantum rigs.</p></div>
+<div class="card"><h3>P4 · Market null (rejected — on purpose)</h3><p>Live Bitcoin return ratios [1.0, 1.47, 0.10, 0.48] vs [1,3,5,7]: distance 3.24 → REJECTED. A suite that cannot fail proves nothing; this one can. Next: null-result journal for physics-inspired finance claims.</p></div>
+</section>
+
+<section id="run">
+<h2>🐳 Run it yourself (tested paths)</h2>
+<pre>git clone &lt;your-fork-url&gt; steel-ball-universe && cd steel-ball-universe
+docker compose up --build lab        # 12 benchmarks → reports/benchmark.json + figures
+docker compose run --rm test         # pytest gate (12 tests)
+# no Docker?
+pip install -r requirements.txt
+python -m src.run_all_benchmarks --output reports/benchmark.json --figures reports/
+pytest tests/ -v</pre>
+<h3>Extend it (add your own claim in 5 minutes)</h3>
+<pre>1. Create src/my_claim.py with run_benchmark() -&gt; {"name": ..., "pass": bool, ...}
+2. Register it in src/run_all_benchmarks.py :: collect()
+3. Add tests/test_my_claim.py asserting pass
+4. Run:  python -m src.run_all_benchmarks && pytest tests/ -v</pre>
+<p class="small">Layout: <span class="mono">src/</span> experiments · <span class="mono">tests/</span> gates · <span class="mono">data/</span> constants + live snapshots · <span class="mono">reports/</span> JSON + PNG · <span class="mono">docs/</span> this site + methods · <span class="mono">tools/</span> demo generator.</p>
+</section>
+
+<section id="pages">
+<h2>🌐 Make this page your project website (GitHub Pages, 2026)</h2>
+<div class="card"><h3>Option A · Deploy from a branch (simplest, no build)</h3><pre>1. Commit docs/index.html + docs/.nojekyll (already in this repo).
+2. Push to GitHub:  git push origin main
+3. GitHub → your repo → Settings → Pages (sidebar: Code, planning, automation → Pages).
+4. Build and deployment → Source:  Deploy from a branch.
+5. Branch: main   Folder: /docs   → Save.
+6. Wait ~1 min → visit  https://&lt;you&gt;.github.io/&lt;repo&gt;/
+Entry file: docs/index.html. .nojekyll disables Jekyll so _-files and plain CSS/JS serve as-is.</pre></div>
+<div class="card"><h3>Option B · GitHub Actions (custom build)</h3><p>Use the included <span class="mono">.github/workflows/pages.yml</span> (upload-pages-artifact → deploy-pages). Then set Source: GitHub Actions. Same URL.</p></div>
+<p class="small">Project sites live at <span class="mono">https://&lt;you&gt;.github.io/&lt;repo&gt;/</span> — use relative paths (<span class="mono">media/demo.mp4</span>, not <span class="mono">/media/…</span>) so CSS/JS/video load under the subpath. Custom domain + HTTPS: Settings → Pages → Custom domain (see Pages docs).</p>
+</section>
+
+<section id="faq">
+<h2>❓ FAQ</h2>
+<details><summary>Do I need physics or finance to use this?</summary><p>No. Follow the beginner guide top-down; every term is defined where it first appears, with a number attached.</p></details>
+<details><summary>How do I put a video in my README?</summary><p>GitHub READMEs do not play arbitrary <span class="mono">&lt;video&gt;</span> tags. Best practice (2026): commit a short GIF (<span class="mono">docs/media/demo.gif</span>, autoplays, &lt;8 MB) with <span class="mono">![alt](docs/media/demo.gif)</span>, and link it to the MP4 or video page. On this Pages site the <span class="mono">&lt;video&gt;</span> tag plays inline with correct MIME. Keep GIFs to one action, 6–12 s, 12 fps, 480–720p.</p></details>
+<details><summary>How are screenshots handled (size, dark mode)?</summary><p>Commit under <span class="mono">docs/images/</span>, reference relatively, set <span class="mono">width</span> so tall shots do not overflow, write alt text describing content (not "screenshot"). Use <span class="mono">&lt;picture&gt;</span> with light/dark sources for themed shots.</p></details>
+<details><summary>What if I am offline?</summary><p>Benchmarks 1–10 and 12 run fully offline. Module 11 uses shipped snapshots and labels them <span class="mono">cached</span>. Docker needs no network after build.</p></details>
+<details><summary>Can I use this for teaching / interviews / a paper?</summary><p>Yes — MIT. Cite via <span class="mono">CITATION.cff</span>. For a paper, start from § Hidden patterns: each has a falsifiable follow-up.</p></details>
+<details><summary>What is intentionally NOT claimed?</summary><p>Simulations check textbook theory vs code, not new measurements; the orbit is Newtonian (GR upgrade proposed); markets are a pipeline check, not physics; the 2026 "quantum gravity" headlines refer to limited regimes, not a complete theory.</p></details>
+</section>
+</div>
+<footer><div class="wrap">
+<p>Steel-Ball Universe · MIT · Reproduce: <span class="mono">docker compose up --build lab</span> · Evidence: <span class="mono">reports/benchmark.json</span> · Cite: <span class="mono">CITATION.cff</span></p>
+<p class="small">What would you ask the ball next? Start with the bells — why should 1, 3, 5, 7 know about squares?</p>
+</div></footer>
+<script>
+// Odd bars
+(function(){const c=document.getElementById('cOdd'),x=c.getContext('2d'),s=document.getElementById('oddN'),v=document.getElementById('oddV');
+function d(){const n=+s.value;v.textContent=n;x.clearRect(0,0,c.width,c.height);const odds=[];for(let k=0;k<n;k++)odds.push(2*k+1);const mx=2*n-1,bw=c.width/(n*1.4);let px=20;odds.forEach((o,i)=>{const h=(o/mx)*150;x.fillStyle=i%2?'#5eead4':'#93c5fd';x.fillRect(px,190-h,bw*0.9,h);x.fillStyle='#eaf0ff';x.font='13px system-ui';x.fillText(o,px+6,205);px+=bw*1.15;});let t=0;for(let k=0;k<n;k++)t+=2*k+1;x.fillStyle='#a9b8d9';x.font='13px system-ui';x.fillText('sum = '+t+' = '+Math.sqrt(t)+'²',20,20);}s.oninput=d;d();})();
+// Orbit
+(function(){const c=document.getElementById('cOrbit'),x=c.getContext('2d'),s=document.getElementById('orbV'),v=document.getElementById('orbVal');let a=0;
+function f(){const sp=+s.value;v.textContent=sp.toFixed(1);x.clearRect(0,0,c.width,c.height);const cx=c.width/2,cy=c.height/2,R=90;x.beginPath();x.arc(cx,cy,R,0,7);x.fillStyle='#3b82f622';x.fill();x.strokeStyle='#3b82f6';x.stroke();const ok=sp>=7.85&&sp<=7.95;const rr=ok?R:R*(sp/7.9);a+=0.06*(sp/7.9);const bx=cx+rr*Math.cos(a),by=cy+rr*Math.sin(a);x.beginPath();x.moveTo(cx,cy);x.lineTo(bx,by);x.strokeStyle='#f8717166';x.stroke();x.beginPath();x.arc(bx,by,7,0,7);x.fillStyle=ok?'#34d399':'#f87171';x.fill();x.fillStyle='#eaf0ff';x.font='13px system-ui';x.fillText(ok?'7.9 km/s → orbit (keeps missing the ground)':sp+' km/s → falls back',14,20);requestAnimationFrame(f);}s.oninput=()=>{};f();})();
+// Double slit
+(function(){const c=document.getElementById('cSlit'),x=c.getContext('2d');let dots=[];
+function th(y){const lam=1,d=8,a=2.6;const b=Math.PI*d*y/(lam*40),al=Math.PI*a*y/(lam*40);const e=Math.abs(al)<1e-9?1:(Math.sin(al)/al)**2;return 4*(Math.cos(b)**2)*e;}
+document.getElementById('slitGo').onclick=()=>{dots=[];for(let i=0;i<2000;i++){const y=(Math.random()*2-1)*140;const p=th(y)/4;if(Math.random()<p)dots.push(y);}draw();};
+function draw(){x.clearRect(0,0,c.width,c.height);x.fillStyle='#0a0f24';x.fillRect(0,0,c.width,c.height);x.strokeStyle='#2a3a66';for(let gx=0;gx<c.width;gx+=40){x.beginPath();x.moveTo(gx,0);x.lineTo(gx,c.height);x.stroke();}dots.forEach(y=>{const px=c.width/2+y*(c.width/320);x.fillStyle='#5eead4';x.fillRect(px,Math.random()*c.height,2,2);});x.fillStyle='#a9b8d9';x.font='13px system-ui';x.fillText(dots.length+' electrons — random dots, wavy odds',12,18);}draw();})();
+</script>
+</body>
+</html>

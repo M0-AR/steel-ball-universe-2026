@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+title: "Steel-Ball Universe: Rebuilding Physics End-to-End From One Rolling Ball — Verified Benchmarks, Live-Data Checks, and Hidden-Pattern Analysis"
+authors:
+  - family-names: "Steel-Ball Lab"
+    given-names: "Universe"
+message: "If you use this repository, please cite it as below."
+version: 1.0.0
+date-released: 2026-10-06
+license: MIT
+repository-code: "https://example.org/steel-ball-universe-2026"
+keywords:
+  - physics-education
+  - reproducible-research
+  - Galileo
+  - Newton
+  - relativity
+  - quantum-mechanics
+  - standard-model
+  - benchmarking
+  - live-data-verification

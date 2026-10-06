@@ -1,0 +1,272 @@
+{
+  "date_utc": "2026-10-06T10:10:21Z",
+  "overall_pass": true,
+  "elapsed_s": 5.208359718322754,
+  "n_benchmarks": 12,
+  "n_passed": 12,
+  "results": [
+    {
+      "name": "galileo_ramp",
+      "theta_deg": 3.0,
+      "a_slide_m_s2": 0.5132404052898651,
+      "a_roll_m_s2": 0.36660028949276086,
+      "roll_factor_5_7": 0.7142857142857144,
+      "interval_ratios": [
+        1.0,
+        3.0,
+        5.0,
+        7.0
+      ],
+      "expected_odd": [
+        1.0,
+        3.0,
+        5.0,
+        7.0
+      ],
+      "max_odd_error": 0.0,
+      "total_ratios": [
+        1.0,
+        4.0,
+        9.0,
+        16.0
+      ],
+      "max_square_error": 0.0,
+      "euler_relative_error": 4.999999993796221e-05,
+      "pass": true
+    },
+    {
+      "name": "inertia_newton",
+      "principia_year": 1687,
+      "inertia_distance_m": 20.0,
+      "inertia_numeric_error": 1.0302869668521452e-14,
+      "fma_max_error": 0.0,
+      "fma_slope_F_vs_a_m1": 0.9999999999999996,
+      "recoil_total_momentum": 0.0,
+      "pass": true
+    },
+    {
+      "name": "gravity_orbit",
+      "v1_m_s": 7909.925843011427,
+      "v1_km_s": 7.909925843011427,
+      "v1_target_km_s": 7.9,
+      "inverse_square_ratio_2R": 0.25,
+      "orbit_period_s": 5060.752071071384,
+      "radius_drift": 4.385592302784331e-12,
+      "energy_drift": 2.024390145734345e-15,
+      "gentle_shot_fell_back": true,
+      "moon_a_grav": 0.002697650425044476,
+      "moon_a_centripetal": 0.0027233372970492096,
+      "moon_relative_error": 0.0095219424156153,
+      "pass": true
+    },
+    {
+      "name": "energy_entropy",
+      "E0_J": 4.903325,
+      "h_return_m": 0.9999999999999998,
+      "energy_drift": 1.8113798691706654e-16,
+      "damped_heights_m": [
+        1.0,
+        0.95,
+        0.9025,
+        0.8573749999999999,
+        0.8145062499999999
+      ],
+      "first_cycle_heat_J": 0.2451662500000002,
+      "entropy_max_at_q": 10,
+      "P_all_in_half_N100": 7.888609052210118e-31,
+      "heat_flow_dS_J_K": 0.008333333333333331,
+      "pass": true
+    },
+    {
+      "name": "waves_sound",
+      "sound_speed_m_s": 343.0,
+      "pulse_split_ok": true,
+      "constructive_amplitude": 2.0,
+      "destructive_amplitude": 0.0,
+      "fringe_visibility": 1.0,
+      "pass": true
+    },
+    {
+      "name": "electromagnetism_light",
+      "coulomb_ratio_2r": 0.25,
+      "c_maxwell_m_s": 299792458.0816064,
+      "c_defined_m_s": 299792458.0,
+      "maxwell_relative_error": 2.7220961006310913e-10,
+      "plane_wave_residual": 1.3159359690652253e-05,
+      "conductor_E_inside": 0.0,
+      "pass": true
+    },
+    {
+      "name": "relativity",
+      "einstein_year": 1905,
+      "gamma_0": 1.0,
+      "gamma_0p99c": 7.088812050083393,
+      "light_clock_ratio": 1.25,
+      "muon_gamma_0p994c": 9.1424332423104,
+      "muon_lab_lifetime_s": 2.008592583335595e-05,
+      "gps_net_us_per_day": 38.0,
+      "E_1kg_J": 8.987551787368176e+16,
+      "pass": true
+    },
+    {
+      "name": "quantum_double_slit",
+      "fringe_spacing_m": 0.0003183333333333334,
+      "expected_spacing_m": 0.0003333333333333334,
+      "mc_correlation_r": 0.9991174641799606,
+      "mc_N": 20000,
+      "hydrogen_lyman_alpha_eV": 10.2,
+      "quantum_era": "1900-1920s",
+      "pass": true
+    },
+    {
+      "name": "standard_model",
+      "matter_count": 12,
+      "gauge_types": [
+        "photon",
+        "gluon",
+        "W",
+        "Z"
+      ],
+      "gauge_type_count": 4,
+      "higgs_count": 1,
+      "total_named_entries": 17,
+      "proton_quarks": "uud",
+      "neutron_quarks": "udd",
+      "proton_charge": 1.0,
+      "neutron_charge": 0.0,
+      "four_interactions": [
+        "strong",
+        "electromagnetic",
+        "weak",
+        "gravitational"
+      ],
+      "sm_covers_three": [
+        "strong",
+        "electromagnetic",
+        "weak"
+      ],
+      "pass": true
+    },
+    {
+      "name": "cosmology_gap",
+      "omega_b": 0.049,
+      "omega_cdm": 0.268,
+      "omega_lambda": 0.683,
+      "omega_sum": 1.0,
+      "baryonic_percent": 4.9,
+      "mercury_precession_arcsec_cy": 43.0,
+      "light_bending_arcsec": 1.75,
+      "gps_net_us_day": 38.0,
+      "quantum_gravity_complete": false,
+      "pass": true
+    },
+    {
+      "name": "live_market_verification",
+      "checks": {
+        "btc": {
+          "source": "live",
+          "n": 169,
+          "spot": 86005.49000404535,
+          "daily_vol": 0.003351727499488203,
+          "ok": true
+        },
+        "fx": {
+          "source": "live",
+          "rates": {
+            "EUR": 0.89254,
+            "GBP": 0.75616,
+            "JPY": 158.23
+          },
+          "ok": true
+        },
+        "aapl": {
+          "source": "live",
+          "last_close": 332.8900146484375,
+          "ok": true
+        }
+      },
+      "pass": true,
+      "note": "Pipeline-integrity benchmark on live data; not a physics claim about markets."
+    },
+    {
+      "name": "hidden_patterns",
+      "odds_to_squares": {
+        "odds": [
+          1,
+          3,
+          5,
+          7,
+          9,
+          11,
+          13,
+          15
+        ],
+        "cumulative": [
+          1,
+          4,
+          9,
+          16,
+          25,
+          36,
+          49,
+          64
+        ],
+        "squares": [
+          1,
+          4,
+          9,
+          16,
+          25,
+          36,
+          49,
+          64
+        ],
+        "match": true
+      },
+      "inverse_square": {
+        "r": [
+          1.0,
+          2.0,
+          3.0,
+          4.0
+        ],
+        "gravity": [
+          1.0,
+          0.25,
+          0.1111111111111111,
+          0.0625
+        ],
+        "loglog_slope": -1.9999999999999996,
+        "is_minus_two": true
+      },
+      "interference": {
+        "V_sound": 1.0,
+        "V_quantum": 1.0,
+        "shared_math": "superposition + |amplitude|^2",
+        "verdict": "same equations, different ontology (medium displacement vs probability)"
+      },
+      "market_null": {
+        "observed_ratios": [
+          1.0,
+          0.07156606308649224,
+          0.3283886669162261,
+          1.4413957579432854
+        ],
+        "odd_law_target": [
+          1.0,
+          3.0,
+          5.0,
+          7.0
+        ],
+        "mean_abs_distance": 3.2896623780134995,
+        "verdict": "REJECTED \u2014 markets do not follow odd-number law"
+      },
+      "pass": true
+    }
+  ],
+  "figures": [
+    "reports/fig01_odd_numbers.png",
+    "reports/fig02_orbit.png",
+    "reports/fig03_doubleslit.png"
+  ]
+}
